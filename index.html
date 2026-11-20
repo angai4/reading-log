@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Reading Log</title>
+  <meta name="description" content="A personal reading log with a spinning wheel to choose what to read next.">
+
+  <!-- Installable app (PWA) bits -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#FF6B6B">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="icons/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Reading Log">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <span class="topbar-logo" aria-hidden="true">📚</span>
+    <h1 id="screen-title">Reading log</h1>
+  </header>
+
+  <main>
+    <!-- Reading log: today's summary, the Log button and the numbered Days -->
+    <section id="screen-log" class="screen" aria-labelledby="screen-title">
+      <div id="log-content"></div>
+    </section>
+
+    <!-- The wheel: canvas + pointer + spin button, then rule results and settings -->
+    <section id="screen-wheel" class="screen" aria-labelledby="screen-title" hidden>
+      <div class="wheel-stage">
+        <div class="wheel-wrap">
+          <div id="wheel-pointer" class="wheel-pointer" aria-hidden="true"></div>
+          <canvas id="wheel-canvas" aria-label="Reading wheel" role="img"></canvas>
+          <button id="spin-btn" class="spin-btn" data-action="spin">SPIN</button>
+          <p id="wheel-empty" class="wheel-empty" hidden>Put some books on the wheel to spin it.</p>
+        </div>
+      </div>
+      <div id="wheel-info"></div>
+    </section>
+
+    <!-- Books: filter by status, add, edit, delete -->
+    <section id="screen-books" class="screen" aria-labelledby="screen-title" hidden>
+      <div id="books-content"></div>
+    </section>
+
+    <!-- Stats, chart and backup -->
+    <section id="screen-stats" class="screen" aria-labelledby="screen-title" hidden>
+      <div id="stats-content"></div>
+    </section>
+  </main>
+
+  <!-- Bottom tab bar -->
+  <nav class="tabbar" aria-label="Main">
+    <button class="tab" data-action="tab" data-tab="log"><span class="tab-icon" aria-hidden="true">📖</span>Log</button>
+    <button class="tab" data-action="tab" data-tab="wheel"><span class="tab-icon" aria-hidden="true">🎡</span>Wheel</button>
+    <button class="tab" data-action="tab" data-tab="books"><span class="tab-icon" aria-hidden="true">📚</span>Books</button>
+    <button class="tab" data-action="tab" data-tab="stats"><span class="tab-icon" aria-hidden="true">📊</span>Stats</button>
+  </nav>
+
+  <!-- One pop-up "sheet" reused for every form and result -->
+  <dialog id="sheet" class="sheet">
+    <div id="sheet-body"></div>
+  </dialog>
+
+  <noscript><p class="fatal">This app needs JavaScript turned on.</p></noscript>
+</body>
+</html>
